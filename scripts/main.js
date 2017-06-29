@@ -1,19 +1,85 @@
-const btn = document.getElementById('button');
+const main = ((document) => {
+  const todoList = document.getElementById('todoList')
+  const form = document.getElementById('form');
+  const text = document.getElementById('text');
+  const date = new Date();
 
-function getText() {
-  let t = document.getElementById('text').value;
-  return t;
-}
+  function createElement(tag, props, ...children) {
+    const element = document.createElement(tag);
 
-function alerting() {
-  if (document.getElementById('text').value !== '') alert(getText());
-}
+    Object.keys(props).forEach(key => element[key] = props[key]);
 
-function createElement() {
-  let newLi = document.createElement('li');
-  newLi.innerHTML = getText();
-  return document.getElementById('ol').appendChild(newLi);
-}
+    if (children.length > 0) {
+      children.forEach((child) => {
+        if (typeof child === 'string') {
+          child = document.createTextNode(child);
+        }
+        element.appendChild(child);
+        console.log(child);
+      });
+    }
+    return element;
+  }
 
-btn.addEventListener('click', alerting);
-btn.addEventListener('click', createElement);
+  function createTodoItem(title) {
+    const checkbox = createElement('input', {
+      type: 'checkbox',
+      className: 'checkbox'
+    });
+
+    const label = createElement('label', {
+      className: 'title'
+    }, title);
+
+    const paragraf = createElement('p', {
+      className: 'date'
+    }, date.toString());
+
+    const deleteButton = createElement('button', {
+      className: 'delete'
+    }, 'X');
+
+    const li = createElement('li', {
+      className: 'items'
+    }, checkbox, label, paragraf, deleteButton);
+
+    bindEvents(li);
+
+    return li;
+  }
+
+  function bindEvents(todoItems) {
+    const checkbox = todoItems.querySelector('.checkbox');
+    const deleteButton = todoItems.querySelector('button.delete');
+
+    checkbox.addEventListener('change', toggleTodoItem)
+    deleteButton.addEventListener('click', deleteTodoItem)
+  }
+
+  function addTodoItems(event) {
+    event.preventDefault();
+    if (text.value === '')
+      return alert('Enter your task');
+
+    const listItem = createTodoItem(text.value);
+    todoList.appendChild(listItem);
+    text.value = '';
+  }
+
+  function toggleTodoItem() {
+    const li = this.parentNode;
+    li.classList.toggle('completed');
+  }
+
+  function deleteTodoItem() {
+    const li = this.parentNode;
+    todoList.removeChild(li);
+  }
+
+  function main() {
+    form.addEventListener('submit', addTodoItems);
+  }
+  return main;
+})(document);
+
+main();
