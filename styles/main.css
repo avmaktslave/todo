@@ -1,7 +1,9 @@
+@import 'normalize.css';
 @import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC');
+
+
 body{
   background-image: url(../images/cork-wallet.png);
-  box-sizing: border-box;
 }
 .container{
   font-family: 'Patrick Hand SC', cursive;
@@ -10,6 +12,10 @@ body{
   max-width: 960px;
   min-height: 500px;
   background: rgba(235, 234, 151, 0.4);
+  margin: 0 auto;
+}
+#form{
+  max-width: 470px;
   margin: 0 auto;
 }
 h1{
@@ -23,31 +29,49 @@ ol{
   display:flex;
   flex-flow: column wrap;
   padding: 5px 5px 5px 5px;
-}
-li{
-  font-size: 1.3rem;
-}
-.input{
-  max-width: 320px;
   margin: 0 auto;
 }
-#text{
-  width: 200px;
+li{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  flex-wrap: wrap;
+}
+.title{
+  margin: 0 10px 0 10px;
+  min-width: 405px;
+  max-width: 405px;
+  background-color: rgb(213, 240, 164);
+}
+.completed{
+  color: #a17878;
+}
+.checkbox{
+  width: 30px;
+  height: 30px;
+}
+input#text{
+  width: 380px;
   height: 30px;
   font-size: 1.3rem;
   border-radius: 5px;
 }
-#button{
-  width: 70px;
+button{
+  min-width: 70px;
   height: 36px;
   border-radius: 5px;
   font-size: 1.3rem;
   font-style: italic;
   box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.5);
+  margin: 2px;
 }
-#button:hover{
+.delete{
+  min-width: 35px;
+  height: 33px;
+}
+button:hover{
   box-shadow: 0px 0px 4px 4px  rgba(255, 255, 255, 0.5);
 }
-#button:active{
+button:active{
   transform: scale(.9);
 }
